@@ -1,137 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 	<meta charset="UTF-8">
-	<title>Landing</title>
-	<meta name="viewport" content="width=device-width">
-	<script src="js/snap.svg-min.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Estoy en mi mundo</title>
+	<style>
+		body {
+			margin: 0;
+		}
+
+		#world {
+			position: absolute;
+			overflow: hidden;
+			width: 100%;
+			height: 100%;
+		}
+	</style>
 </head>
 <body>
-	<canvas id="constellation"></canvas>
-	<header id="main-header">
-		<span id="icon-hamburger-cross" data-icon-name="hamburgerCross"></span>
-		<div id="lateral-main-menu">
-			<div class="container">
-				<div class="col-xs-12">
-					<div class="row">
-						<nav>
-							<ul>
-								<li><a href="#">1</a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-							</ul>
-						</nav>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
-	<section id="main-section">
-		<div class="container-distortion">
-			<span id="distortion__hello" class="distortion">Hola! </span>
-			<div id="distortion__edit" class="distortion">- Necesito ayuda en:</div>
-			<span id="distortion__words" contenteditable="true"></span>
-		</div>
-	</section>
-	<section>
-		kfsldñdsljk
-	</section>
-	<svg id="distortion-filters" xmlns="http://www.w3.org/2000/svg" version="1.1">
-		<defs>
-			<filter id="dist-01">
-				<feTurbulence id="turbulence" baseFrequency="0.02" numOctaves="8" result="noise" seed="0"/>
-				<feConvolveMatrix in="noise" order="3" result="snoise" 
-				kernelMatrix="
-					 0  -1   0
-					-1   5  -1
-					 0  -1   0    
-				"/>
-				<feDisplacementMap id="displacement" in="SourceGraphic" in2="snoise" scale="6" />
-			</filter>
-			<filter id="dist-02">
-				<feTurbulence id="turbulence" baseFrequency="0.2" numOctaves="8" result="noise" seed="1"/>
-				<feConvolveMatrix in="noise" order="3" result="snoise"
-				kernelMatrix="
-					 0  -1   0
-					-1   5  -1
-					 0  -1   0    
-				"/>
-				<feDisplacementMap id="displacement" in="SourceGraphic" in2="snoise" scale="6" />
-			</filter>
-			<filter id="dist-03">
-				<feTurbulence id="turbulence" baseFrequency="0.01" numOctaves="6" result="noise" seed="2"/>
-				<feConvolveMatrix in="noise" order="3" result="snoise"
-				kernelMatrix="
-					 0  -1   0
-					-1   5  -1
-					 0  -1   0    
-				"/>
-				<feDisplacementMap id="displacement" in="SourceGraphic" in2="snoise" scale="6" />
-			</filter>
-			<filter id="dist-04">
-				<feTurbulence id="turbulence" baseFrequency="0.01" numOctaves="6" result="noise" seed="2"/>
-				<feDisplacementMap id="displacement" in="SourceGraphic" in2="noise" scale="6" />
-			</filter>
-		</defs> 
-	</svg>
-	<script src="js/svgicons-config.js"></script>
-	<script src="js/svgicons.js"></script>
-	<script>
-
-		var cw = 0;
-		phrases = ["Texto1", "Texto2", "Texto3", "Texto4"];
-
-		cw = Math.random()*(phrases.length);
-		cw = Math.floor(cw);
-
-		var aux = true;
-
-		document.getElementById("distortion__words").onclick = function(e) {
-			this.innerHTML = "";
-			aux = false;
-			e.stopPropagation();
-		}
-		window.onclick = function() {
-			if (cw == phrases.length) {
-				cw = 0;
-			}
-			document.getElementById("distortion__words").innerHTML = phrases[cw];
-			aux = true;
-		}
-
-		function rotate() {
-			if (aux == true) {
-				if (cw == phrases.length) {
-					cw = 0;
-				}
-				document.getElementById("distortion__words").innerHTML = phrases[cw];
-				cw++;
-			}
-			setTimeout("rotate();",2000);
-		}
-		window.onload = rotate();
-
-		(function() {
-			var hmbrgr = document.getElementById('icon-hamburger-cross'),
-				ltlmn = document.getElementById('lateral-main-menu');
-			hmbrgr.onclick = function() {
-				clssOb = ltlmn.className;
-				if (clssOb != 'active') {
-					ltlmn.className = 'active';
-					this.className = 'active';
-				}
-				else {
-					ltlmn.className = '';
-					this.className = '';
-				}
-			}
-			new svgIcon( document.getElementById('icon-hamburger-cross'), svgIconConfig, { easing : mina.elastic, speed: 600 } );
-			//new svgIcon( document.getElementById('icon-hamburger-cross'), svgIconConfig, { speed: 300 } );
-		})();
-	</script>
-	<script type="text/javascript" src="js/constellation.js"></script>
+	<div id='world'></div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/84/three.min.js"></script>
+	<script src="./dist/index.js"></script>
 </body>
 </html>
